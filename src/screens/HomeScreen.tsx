@@ -1,9 +1,15 @@
+import React from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import ForumScreen from '../screens/ForumScreen';
+import ThoughtsScreen from '../screens/ThoughtsScreen';
 import {View, Text} from 'react-native';
-import TopTabsNavigator from '../navigation/TopTabsNavigator';
+import CustomTopTabBar from '../components/CustomTopTabBar';
+
+const TopTab = createMaterialTopTabNavigator();
 
 const HomeScreen = () => {
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View
         style={{
           backgroundColor: '#EAF2EA',
@@ -48,9 +54,10 @@ const HomeScreen = () => {
         />
       </View>
 
-      <View style={{backgroundColor: 'red', flex: 1}}>
-        <TopTabsNavigator />
-      </View>
+      <TopTab.Navigator tabBar={props => <CustomTopTabBar {...props} />}>
+        <TopTab.Screen name="Questions" component={ForumScreen} />
+        <TopTab.Screen name="Thoughts" component={ThoughtsScreen} />
+      </TopTab.Navigator>
     </View>
   );
 };

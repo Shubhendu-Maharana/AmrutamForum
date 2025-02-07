@@ -1,0 +1,189 @@
+[
+  {
+    "id": 1,
+    "user": "Dr. John Doe",
+    "time": "2025-02-06 14:30",
+    "picture": "https://randomuser.me/api/portraits/men/1.jpg",
+    "question": "What are the latest treatments for asthma?",
+    "details": "I am looking for more information on the latest treatments and techniques for managing asthma, especially in children.",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Inhalers with corticosteroids are still widely recommended, but newer biologic treatments are showing great promise.",
+        "doctor": "Dr. Jane Smith",
+        "picture": "https://randomuser.me/api/portraits/women/2.jpg",
+        "time": "2025-02-06 14:45"
+      },
+      {
+        "id": 2,
+        "text": "You may also want to look into nebulizer treatments, especially for acute cases.",
+        "doctor": "Dr. Robert Brown",
+        "picture": "https://randomuser.me/api/portraits/men/3.jpg",
+        "time": "2025-02-06 15:00"
+      }
+    ],
+    "likes": 120,
+    "likedByUser": true,
+    "savedByUser": false
+  },
+  {
+    "id": 2,
+    "user": "Dr. Sarah Miller",
+    "time": "2025-02-05 12:20",
+    "picture": "https://randomuser.me/api/portraits/women/3.jpg",
+    "question": "How do I manage type 2 diabetes effectively?",
+    "details": "What are the most effective lifestyle changes and medications for managing type 2 diabetes?",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Consistent exercise, a balanced diet, and medication like metformin are key components of diabetes management.",
+        "doctor": "Dr. Laura Green",
+        "picture": "https://randomuser.me/api/portraits/women/4.jpg",
+        "time": "2025-02-05 12:45"
+      }
+    ],
+    "likes": 98,
+    "likedByUser": false,
+    "savedByUser": true
+  },
+  {
+    "id": 3,
+    "user": "Dr. Emily Davis",
+    "time": "2025-02-04 09:00",
+    "picture": "https://randomuser.me/api/portraits/women/5.jpg",
+    "question": "What are the side effects of chemotherapy?",
+    "details": "I’m looking to provide my patients with a comprehensive guide to chemotherapy side effects.",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Common side effects include nausea, fatigue, hair loss, and weakened immune function.",
+        "doctor": "Dr. Michael Clark",
+        "picture": "https://randomuser.me/api/portraits/men/4.jpg",
+        "time": "2025-02-04 09:30"
+      }
+    ],
+    "likes": 75,
+    "likedByUser": true,
+    "savedByUser": false
+  },
+  {
+    "id": 4,
+    "user": "Dr. William Turner",
+    "time": "2025-02-03 16:15",
+    "picture": "https://randomuser.me/api/portraits/men/5.jpg",
+    "question": "What are the best practices for mental health care?",
+    "details": "What are some effective strategies for managing mental health conditions like depression and anxiety?",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Cognitive-behavioral therapy (CBT) and mindfulness-based practices are highly recommended.",
+        "doctor": "Dr. Olivia Walker",
+        "picture": "https://randomuser.me/api/portraits/women/6.jpg",
+        "time": "2025-02-03 16:40"
+      }
+    ],
+    "likes": 200,
+    "likedByUser": false,
+    "savedByUser": true
+  },
+  {
+    "id": 5,
+    "user": "Dr. David Adams",
+    "time": "2025-02-02 18:50",
+    "picture": "https://randomuser.me/api/portraits/men/6.jpg",
+    "question": "What is the current treatment for COVID-19?",
+    "details": "I would like to know about the most recent advancements in the treatment of COVID-19.",
+    "replies": [
+      {
+        "id": 1,
+        "text": "New antiviral medications and vaccines are the main focus of COVID-19 treatment right now.",
+        "doctor": "Dr. Emma Scott",
+        "picture": "https://randomuser.me/api/portraits/women/7.jpg",
+        "time": "2025-02-02 19:10"
+      }
+    ],
+    "likes": 150,
+    "likedByUser": true,
+    "savedByUser": false
+  },
+  {
+    "id": 6,
+    "user": "Dr. Mary Johnson",
+    "time": "2025-02-01 10:00",
+    "picture": "https://randomuser.me/api/portraits/women/8.jpg",
+    "question": "How do you treat heart disease in elderly patients?",
+    "details": "What treatments and care plans are best for older patients with heart disease?",
+    "replies": [
+      {
+        "id": 1,
+        "text": "A combination of medications, lifestyle changes, and close monitoring is essential.",
+        "doctor": "Dr. Robert Lee",
+        "picture": "https://randomuser.me/api/portraits/men/7.jpg",
+        "time": "2025-02-01 10:30"
+      }
+    ],
+    "likes": 130,
+    "likedByUser": false,
+    "savedByUser": true
+  },
+  {
+    "id": 7,
+    "user": "Dr. James Wilson",
+    "time": "2025-01-30 11:00",
+    "picture": "https://randomuser.me/api/portraits/men/8.jpg",
+    "question": "What is the most effective way to quit smoking?",
+    "details": "I want to know about the most effective smoking cessation methods.",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Nicotine replacement therapy and behavioral counseling are highly recommended.",
+        "doctor": "Dr. Jessica Young",
+        "picture": "https://randomuser.me/api/portraits/women/9.jpg",
+        "time": "2025-01-30 11:30"
+      }
+    ],
+    "likes": 110,
+    "likedByUser": true,
+    "savedByUser": false
+  },
+  {
+    "id": 8,
+    "user": "Dr. Patricia White",
+    "time": "2025-01-29 17:45",
+    "picture": "https://randomuser.me/api/portraits/women/10.jpg",
+    "question": "How can I help patients with chronic pain?",
+    "details": "What treatments are available for chronic pain management?",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Chronic pain is often treated with a combination of medication, physical therapy, and lifestyle changes.",
+        "doctor": "Dr. Mark Brown",
+        "picture": "https://randomuser.me/api/portraits/men/9.jpg",
+        "time": "2025-01-29 18:00"
+      }
+    ],
+    "likes": 180,
+    "likedByUser": false,
+    "savedByUser": true
+  },
+  {
+    "id": 9,
+    "user": "Dr. Laura Green",
+    "time": "2025-01-28 13:20",
+    "picture": "https://randomuser.me/api/portraits/women/11.jpg",
+    "question": "What’s the latest research on Alzheimer’s disease?",
+    "details": "Can anyone share the latest findings on the treatment and management of Alzheimer’s?",
+    "replies": [
+      {
+        "id": 1,
+        "text": "Recent studies are focusing on early diagnosis and the use of biomarkers for treatment.",
+        "doctor": "Dr. Brian White",
+        "picture": "https://randomuser.me/api/portraits/men/10.jpg",
+        "time": "2025-01-28 13:50"
+      }
+    ],
+    "likes": 90,
+    "likedByUser": true,
+    "savedByUser": false
+  }
+]

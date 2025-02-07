@@ -7,7 +7,6 @@ import Ionicons from '@react-native-vector-icons/ionicons';
 import PatientScreen from '../screens/PatientScreen';
 import BulletinScreen from '../screens/BulletinScreen';
 import PaymentScreen from '../screens/PaymentScreen';
-import TopTabNavigator from './TopTabsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +44,7 @@ const RootNavigator = () => {
             height: 70,
           },
         })}>
-        <Tab.Screen name="Home" component={TopTabNavigator} />
+        <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Appointment" component={AppointmentScreen} />
         <Tab.Screen name="Patient" component={PatientScreen} />
         <Tab.Screen name="Bulletin" component={BulletinScreen} />

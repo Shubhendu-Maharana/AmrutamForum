@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "user": "Dr. Aditi Sharma",
+    "time": "2 hours ago",
+    "picture": "https://randomuser.me/api/portraits/women/45.jpg",
+    "thought": "Mental Health Matters",
+    "text": "Mental health is just as important as physical health. Take time to care for your mind and emotions.",
+    "postPicture": "https://picsum.photos/500/500",
+    "likes": 10,
+    "likedByUser": false,
+    "savedByUser": false,
+    "comments": [
+      {
+        "id": 1,
+        "user": "Dr. Rohan Mehta",
+        "text": "Absolutely! Self-care is essential.",
+        "time": "1 hour ago",
+        "picture": "https://randomuser.me/api/portraits/men/32.jpg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "user": "Dr. Rohan Mehta",
+    "time": "5 hours ago",
+    "picture": "https://randomuser.me/api/portraits/men/32.jpg",
+    "thought": "Kindness Goes a Long Way",
+    "text": "A small act of kindness can make a big difference in someone's day. Spread positivity!",
+    "postPicture": "https://picsum.photos/500/500",
+    "likes": 24,
+    "likedByUser": false,
+    "savedByUser": true,
+    "comments": [
+      {
+        "id": 1,
+        "user": "Dr. Priya Nair",
+        "text": "Love this message! Positivity is contagious.",
+        "time": "2 hours ago",
+        "picture": "https://randomuser.me/api/portraits/women/29.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "user": "Dr. Priya Nair",
+    "time": "1 day ago",
+    "picture": "https://randomuser.me/api/portraits/women/29.jpg",
+    "thought": "Your Feelings Are Valid",
+    "text": "Never be afraid to express yourself and seek help when needed. You are not alone.",
+    "postPicture": "https://picsum.photos/500/500",
+    "likes": 15,
+    "likedByUser": true,
+    "savedByUser": false,
+    "comments": [
+      {
+        "id": 1,
+        "user": "Dr. Kabir Verma",
+        "text": "So important to remind people of this.",
+        "time": "12 hours ago",
+        "picture": "https://randomuser.me/api/portraits/men/22.jpg"
+      },
+      {
+        "id": 2,
+        "user": "Dr. Ananya Rao",
+        "text": "Seeking help is a sign of strength!",
+        "time": "6 hours ago",
+        "picture": "https://randomuser.me/api/portraits/women/15.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "user": "Dr. Kabir Verma",
+    "time": "2 days ago",
+    "picture": "https://randomuser.me/api/portraits/men/22.jpg",
+    "thought": "Listen with Empathy",
+    "text": "A good conversation can heal a wounded heart. Always listen with empathy.",
+    "postPicture": "https://picsum.photos/500/500",
+    "likes": 30,
+    "likedByUser": false,
+    "savedByUser": false,
+    "comments": []
+  },
+  {
+    "id": 5,
+    "user": "Dr. Ananya Rao",
+    "time": "3 days ago",
+    "picture": "https://randomuser.me/api/portraits/women/15.jpg",
+    "thought": "Self-Care is a Priority",
+    "text": "Self-care is not selfish. Prioritize your well-being to be the best version of yourself.",
+    "postPicture": "https://picsum.photos/500/500",
+    "likes": 19,
+    "likedByUser": true,
+    "savedByUser": true,
+    "comments": [
+      {
+        "id": 1,
+        "user": "Dr. Aditi Sharma",
+        "text": "Great reminder! Taking care of yourself is key.",
+        "time": "1 day ago",
+        "picture": "https://randomuser.me/api/portraits/women/45.jpg"
+      }
+    ]
+  }
+]
