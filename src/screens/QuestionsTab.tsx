@@ -1,61 +1,57 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
-import thoughts from '../data/thoughts.json';
+import questions from '../data/questions.json';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CommentsModal from '../components/CommentsModal';
 import CommentCard from '../components/CommentCard';
-import NewThoughtModal from '../components/NewThoughtModal';
 
-interface Thought {
+interface Post {
   id: number;
   user: string;
   time: string;
   picture: string;
-  thought: string;
-  text: string;
-  postPicture: string;
+  question: string;
+  details: string;
+  replies: {
+    id: number;
+    text: string;
+    doctor: string;
+    picture: string;
+    time: string;
+  }[];
   likes: number;
   likedByUser: boolean;
   savedByUser: boolean;
-  comments: {
-    id: number;
-    user: string;
-    text: string;
-    time: string;
-    picture: string;
-  }[];
 }
 
-const ThoughtsScreen = () => {
-  const [thoughtData, setThoughtData] = useState<Array<Thought>>([]);
-  const [commentModalVisible, setCommentModalVisible] = useState(false);
-  const [thoughtModalVisible, setThoughtModalVisible] = useState(false);
-  const [selectedComments, setSelectedComments] = useState<Thought['comments']>(
-    [],
-  );
+const QuestionsTab = () => {
+  const [forumData, setForumData] = useState<Array<Post>>([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedComments, setSelectedComments] = useState<Post['replies']>([]);
   const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
-      const storedData = await AsyncStorage.getItem('thoughtData');
+      const storedData = await AsyncStorage.getItem('forumData');
       if (storedData) {
-        setThoughtData(JSON.parse(storedData));
+        setForumData(JSON.parse(storedData));
       } else {
-        setThoughtData(thoughts);
-        await AsyncStorage.setItem('thoughtData', JSON.stringify(thoughts));
+        setForumData(questions);
+        await AsyncStorage.setItem('forumData', JSON.stringify(questions));
       }
     };
     loadData();
   }, []);
 
-  const updateData = async (updatedData: Array<Thought>) => {
-    setThoughtData(updatedData);
-    await AsyncStorage.setItem('thoughtData', JSON.stringify(updatedData));
+  const updateData = async (updatedData: Array<Post>) => {
+    setForumData(updatedData);
+    await AsyncStorage.setItem('forumData', JSON.stringify(updatedData));
   };
 
   const handleLike = (id: number) => {
-    const updatedData = thoughtData.map(q =>
+    const updatedData = forumData.map(q =>
       q.id === id
         ? {
             ...q,
@@ -68,7 +64,7 @@ const ThoughtsScreen = () => {
   };
 
   const handleSave = (id: number) => {
-    const updatedData = thoughtData.map(q =>
+    const updatedData = forumData.map(q =>
       q.id === id
         ? {
             ...q,
@@ -79,30 +75,26 @@ const ThoughtsScreen = () => {
     updateData(updatedData);
   };
 
-  const openCommentsModal = (comments: Thought['comments'], postId: number) => {
+  const openCommentsModal = (comments: Post['replies'], postId: number) => {
     setSelectedComments(comments);
     setSelectedPostId(postId);
-    setCommentModalVisible(true);
-  };
-
-  const openNewThoughtModal = () => {
-    setThoughtModalVisible(true);
+    setModalVisible(true);
   };
 
   const handleAddComment = (commentText: string) => {
     if (selectedPostId !== null) {
-      const updatedData = thoughtData.map(post =>
+      const updatedData = forumData.map(post =>
         post.id === selectedPostId
           ? {
               ...post,
               replies: [
-                ...post.comments,
+                ...post.replies,
                 {
-                  id: post.comments.length + 1,
+                  id: post.replies.length + 1,
                   text: commentText,
                   doctor: 'Dr. User',
                   picture: `https://picsum.photos/seed/${
-                    post.comments.length + 1
+                    post.replies.length + 1
                   }/200`,
                   time: new Date().toLocaleString(),
                 },
@@ -111,14 +103,8 @@ const ThoughtsScreen = () => {
           : post,
       );
       updateData(updatedData);
-      setCommentModalVisible(false); // Close modal after adding comment
+      setModalVisible(false);
     }
-  };
-
-  const handleAddThought = (newThought: Thought) => {
-    const updatedData = [newThought, ...thoughtData];
-    updateData(updatedData);
-    setThoughtModalVisible(false);
   };
 
   return (
@@ -128,7 +114,7 @@ const ThoughtsScreen = () => {
           backgroundColor: 'white',
         }}
         showsVerticalScrollIndicator={false}
-        data={thoughtData}
+        data={forumData}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <View
@@ -175,26 +161,17 @@ const ThoughtsScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <Text style={{fontSize: 16, marginTop: 5, color: '#2E2F2E'}}>
-              <Text style={{fontWeight: '800'}}>Thought: </Text>
-              {item.thought}
+            <View style={{marginTop: 5}}>
+              <Text style={{fontSize: 16, fontWeight: '800', color: '#2E2F2E'}}>
+                Question:{' '}
+              </Text>
+              <Text style={{fontSize: 16, color: '#2E2F2E'}}>
+                {item.question}
+              </Text>
+            </View>
+            <Text style={{fontSize: 14, marginVertical: 15, color: '#1E1E1E'}}>
+              {item.details}
             </Text>
-
-            <Text style={{fontSize: 16, marginTop: 10, color: '#2E2F2E'}}>
-              {item.text}
-            </Text>
-
-            {item.postPicture && (
-              <Image
-                source={{uri: item.postPicture}}
-                style={{
-                  marginTop: 10,
-                  height: 300,
-                  width: '100%',
-                  borderRadius: 12,
-                }}
-              />
-            )}
 
             <View
               style={{
@@ -213,25 +190,25 @@ const ThoughtsScreen = () => {
                 }}
               />
               <Text style={{fontSize: 16, color: '#8D8D8D'}}>
-                {item.comments.length > 0
-                  ? `${item.comments.length} Replies`
-                  : `${item.comments.length} Reply`}
+                {item.replies.length > 0
+                  ? `${item.replies.length} Replies`
+                  : `${item.replies.length} Reply`}
               </Text>
 
               <TouchableOpacity
-                onPress={() => openCommentsModal(item.comments, item.id)}
+                onPress={() => openCommentsModal(item.replies, item.id)}
                 style={{marginLeft: 'auto'}}>
                 <Text
                   style={{fontSize: 14, color: '#3A643B', fontWeight: '700'}}>
-                  {item.comments.length > 0
-                    ? `View All ${item.comments.length} Replies`
+                  {item.replies.length > 0
+                    ? `View All ${item.replies.length} Replies`
                     : ''}
                 </Text>
               </TouchableOpacity>
             </View>
 
-            {item.comments.length > 0 && (
-              <CommentCard comment={item.comments[item.comments.length - 1]} />
+            {item.replies.length > 0 && (
+              <CommentCard comment={item.replies[item.replies.length - 1]} />
             )}
 
             <View
@@ -260,7 +237,7 @@ const ThoughtsScreen = () => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => openCommentsModal(item.comments, item.id)}
+                onPress={() => openCommentsModal(item.replies, item.id)}
                 style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
                 <Ionicons
                   name="chatbubble-ellipses-outline"
@@ -268,7 +245,7 @@ const ThoughtsScreen = () => {
                   color={'#8D8D8D'}
                 />
                 <Text style={{fontSize: 17, color: '#8D8D8D'}}>
-                  {`${item.comments.length} Reply`}
+                  {`${item.replies.length} Reply`}
                 </Text>
               </TouchableOpacity>
 
@@ -288,34 +265,14 @@ const ThoughtsScreen = () => {
           </View>
         )}
       />
-      <TouchableOpacity
-        onPress={openNewThoughtModal}
-        style={{
-          position: 'absolute',
-          bottom: 20,
-          right: 20,
-          backgroundColor: '#3A643B',
-          borderRadius: 50,
-          height: 56,
-          width: 56,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Ionicons name="add-outline" size={28} color={'white'} />
-      </TouchableOpacity>
       <CommentsModal
-        visible={commentModalVisible}
-        onClose={() => setCommentModalVisible(false)}
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
         comments={selectedComments}
         onAddComment={handleAddComment}
-      />
-      <NewThoughtModal
-        visible={thoughtModalVisible}
-        onClose={() => setThoughtModalVisible(false)}
-        onAddThought={handleAddThought}
       />
     </>
   );
 };
 
-export default ThoughtsScreen;
+export default QuestionsTab;

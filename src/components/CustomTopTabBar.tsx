@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/react-in-jsx-scope */
 import {MaterialTopTabBarProps} from '@react-navigation/material-top-tabs';
 import {Text, TouchableOpacity, View} from 'react-native';
 

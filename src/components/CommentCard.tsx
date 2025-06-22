@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/react-in-jsx-scope */
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 

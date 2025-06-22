@@ -1,9 +1,10 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {View, Text, StyleSheet} from 'react-native';
 
-const PatientScreen = () => {
+const ConsultScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Patient Screen</Text>
+      <Text style={styles.text}>Consult Screen</Text>
     </View>
   );
 };
@@ -13,4 +14,4 @@ const styles = StyleSheet.create({
   text: {fontSize: 20, fontWeight: 'bold'},
 });
 
-export default PatientScreen;
+export default ConsultScreen;

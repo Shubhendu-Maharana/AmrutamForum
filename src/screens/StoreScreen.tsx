@@ -1,9 +1,10 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {View, Text, StyleSheet} from 'react-native';
 
-const AppointmentScreen = () => {
+const StoreScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Appointment Screen</Text>
+      <Text style={styles.text}>Store Screen</Text>
     </View>
   );
 };
@@ -13,4 +14,4 @@ const styles = StyleSheet.create({
   text: {fontSize: 20, fontWeight: 'bold'},
 });
 
-export default AppointmentScreen;
+export default StoreScreen;
