@@ -7,6 +7,7 @@ import Refund from './Refund';
 import ReschedulingScreen from './ReschedulingScreen';
 import AppointmentOverview from './AppointmentOverview';
 import AppointmentConfirmationScreen from './AppointmentConfirmationScreen';
+import EditInfo from './EditInfo';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const ProfileRoutes = () => {
       <Stack.Screen name="Refund" component={Refund} />
       <Stack.Screen name="Rescheduing" component={ReschedulingScreen} />
       <Stack.Screen name="Overview" component={AppointmentOverview} />
+      <Stack.Screen name="EditInfo" component={EditInfo} />
       <Stack.Screen
         name="Confirmation"
         component={AppointmentConfirmationScreen}

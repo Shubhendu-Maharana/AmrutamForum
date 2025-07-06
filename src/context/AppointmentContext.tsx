@@ -1,19 +1,6 @@
 import React, {createContext, useContext, useState, ReactNode} from 'react';
 import {dummyAppointments} from '../data/dummyAppointments';
-
-// Define type
-export interface Appointment {
-  id: string;
-  doctorName: string;
-  specialization: string;
-  status: 'Upcoming' | 'Completed' | 'Cancelled' | 'Rescheduled';
-  date: string;
-  time: string;
-  doctorImage: string;
-  cancellactionReason?: string;
-  returnAmount?: string;
-  rescheduleReason?: string;
-}
+import {Appointment} from '../types';
 
 // Create context type
 interface AppointmentContextType {
@@ -25,11 +12,7 @@ interface AppointmentContextType {
   >;
   getAppointmentById: (id: string) => Appointment | undefined;
   cancelAppointment: (reason: string, returnAmount: string) => void;
-  rescheduleAppointment: (
-    date?: string,
-    time?: string,
-    reason?: string,
-  ) => void;
+  rescheduleAppointment: () => void;
 }
 
 // Create context
@@ -44,7 +27,7 @@ export const AppointmentProvider: React.FC<{children: ReactNode}> = ({
   const [appointments, setAppointments] =
     useState<Appointment[]>(dummyAppointments);
   const [currentAppointment, setCurrentAppointment] =
-    useState<Appointment | null>(null);
+    useState<Appointment | null>(dummyAppointments[0]);
 
   const getAppointmentById = (id: string) =>
     appointments.find(a => a.id === id);
@@ -74,34 +57,9 @@ export const AppointmentProvider: React.FC<{children: ReactNode}> = ({
     );
   };
 
-  const rescheduleAppointment = (
-    date: string,
-    time: string,
-    reason: string,
-  ) => {
-    // Update the status of the appointment
-    setCurrentAppointment(
-      prev =>
-        prev && {
-          ...prev,
-          status: 'Rescheduled',
-          date,
-          time,
-          rescheduleReason: reason,
-        },
-    );
+  const rescheduleAppointment = () => {
     setAppointments(prev =>
-      prev.map(a =>
-        a.id === currentAppointment?.id
-          ? {
-              ...a,
-              status: 'Rescheduled',
-              date,
-              time,
-              rescheduleReason: reason,
-            }
-          : a,
-      ),
+      prev.map(a => (a.id === currentAppointment?.id ? currentAppointment : a)),
     );
   };
 

@@ -55,23 +55,26 @@ const AppointmentOverview = () => {
           }}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={{fontSize: 20, fontWeight: '500'}}>Date and time</Text>
-            <TouchableOpacity>
-              <Text style={{fontSize: 16, fontWeight: '500', color: '#3A643B'}}>
-                Edit
-              </Text>
-            </TouchableOpacity>
           </View>
           {renderRow({
             label: 'Appointment Date',
-            value: currentAppointment?.date,
+            value: currentAppointment?.dateTime
+              ? new Intl.DateTimeFormat('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                }).format(new Date(currentAppointment.dateTime))
+              : undefined,
           })}
           {renderRow({
             label: 'Appointment Time',
-            value: currentAppointment?.time,
-          })}
-          {renderRow({
-            label: 'Consultation Type',
-            value: 'Video Consultaion',
+            value: currentAppointment?.dateTime
+              ? new Intl.DateTimeFormat('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                }).format(new Date(currentAppointment.dateTime))
+              : undefined,
           })}
         </View>
         <View
@@ -85,23 +88,26 @@ const AppointmentOverview = () => {
           }}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={{fontSize: 20, fontWeight: '500'}}>Concern</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('EditInfo', {title: 'Your Concern'})
+              }>
               <Text style={{fontSize: 16, fontWeight: '500', color: '#3A643B'}}>
                 Edit
               </Text>
             </TouchableOpacity>
           </View>
           {renderRow({
-            label: 'Concern',
-            value: 'Diabetes',
+            label: currentAppointment?.symptomDetails?.[0]?.label ?? '',
+            value: currentAppointment?.symptomDetails?.[0]?.value,
           })}
           {renderRow({
-            label: 'Severity',
-            value: 'Moderate  ',
+            label: currentAppointment?.symptomDetails?.[1]?.label ?? '',
+            value: currentAppointment?.symptomDetails?.[1]?.value,
           })}
           {renderRow({
-            label: 'How long?',
-            value: '28 days',
+            label: currentAppointment?.symptomDetails?.[2]?.label ?? '',
+            value: currentAppointment?.symptomDetails?.[2]?.value,
           })}
         </View>
         <View
@@ -117,7 +123,10 @@ const AppointmentOverview = () => {
             <Text style={{fontSize: 20, fontWeight: '500'}}>
               Basic information
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('EditInfo', {title: 'Basic Info'})
+              }>
               <Text style={{fontSize: 16, fontWeight: '500', color: '#3A643B'}}>
                 Edit
               </Text>
@@ -125,19 +134,19 @@ const AppointmentOverview = () => {
           </View>
           {renderRow({
             label: 'Gender',
-            value: 'Female',
+            value: currentAppointment?.basicInfo?.gender,
           })}
           {renderRow({
             label: 'Age',
-            value: '28 years  ',
+            value: currentAppointment?.basicInfo?.age,
           })}
           {renderRow({
             label: 'Height',
-            value: '171 cm',
+            value: currentAppointment?.basicInfo?.height,
           })}
           {renderRow({
             label: 'Weight',
-            value: '63 kg',
+            value: currentAppointment?.basicInfo?.weight,
           })}
         </View>
       </ScrollView>

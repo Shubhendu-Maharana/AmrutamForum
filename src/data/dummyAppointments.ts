@@ -1,60 +1,354 @@
-export interface AppointmentCardItem {
-  id: string;
-  doctorName: string;
-  specialization: string;
-  status: 'Upcoming' | 'Completed' | 'Cancelled' | 'Rescheduled';
-  date: string;
-  time: string;
-  doctorImage: string;
-  cancellactionReason?: string;
-  returnAmount?: string;
-  rescheduleReason?: string;
-}
+import {Appointment} from '../types';
 
-export const dummyAppointments: AppointmentCardItem[] = [
+export const dummyAppointments: Appointment[] = [
   {
     id: 'apt-001',
     doctorName: 'Deepa Godara',
     specialization: 'Orthodontist',
-    status: 'Upcoming',
-    date: 'Sunday, 22/06/2025',
-    time: '11:50 PM',
+    status: 'Completed',
+    dateTime: '2025-06-22T23:50:00',
     doctorImage: 'https://i.pravatar.cc/150?img=12',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'APPLF10247816'},
+      {label: 'Appointment type', value: 'Freeaudio'},
+      {label: 'Appointment fee', value: '0 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Headache'},
+      {label: 'Severity', value: 'Moderate'},
+      {label: 'Duration', value: '1 day'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'APPLF10247816'},
+      {label: 'Coupon type', value: 'Freeaudio'},
+      {label: 'Coupon status', value: 'Completed'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'APPLF10247816'},
+      {label: 'Booking fee', value: '0 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
   },
   {
     id: 'apt-002',
-    doctorName: 'Rajat Ahuja',
-    specialization: 'Ayurvedic Specialist',
+    doctorName: 'Rajiv Sinha',
+    specialization: 'Dermatologist',
     status: 'Completed',
-    date: 'Friday, 08/09/2023',
-    time: '05:00 PM',
-    doctorImage: 'https://i.pravatar.cc/150?img=8',
+    dateTime: '2025-06-10T14:15:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=20',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'DERM30981230'},
+      {label: 'Appointment type', value: 'Video'},
+      {label: 'Appointment fee', value: '300 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Skin rash'},
+      {label: 'Severity', value: 'Severe'},
+      {label: 'Duration', value: '3 days'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'DERM30981230'},
+      {label: 'Coupon type', value: 'Discounted'},
+      {label: 'Coupon status', value: 'Used'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'DERM30981230'},
+      {label: 'Booking fee', value: '300 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
   },
   {
     id: 'apt-003',
-    doctorName: 'Rohini Mehra',
-    specialization: 'Dermatologist',
+    doctorName: 'Priya Mehta',
+    specialization: 'Pediatrician',
     status: 'Cancelled',
-    date: 'Monday, 18/09/2023',
-    time: '09:15 AM',
-    doctorImage: 'https://i.pravatar.cc/150?img=3',
+    dateTime: '2025-06-12T10:00:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=5',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'PED93274812'},
+      {label: 'Appointment type', value: 'In-person'},
+      {label: 'Appointment fee', value: '500 INR'},
+      {label: 'Booking Status', value: 'Cancelled'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Fever'},
+      {label: 'Severity', value: 'Mild'},
+      {label: 'Duration', value: '2 days'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'PED93274812'},
+      {label: 'Coupon type', value: 'NA'},
+      {label: 'Coupon status', value: 'Not used'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'PED93274812'},
+      {label: 'Booking fee', value: '500 INR'},
+      {label: 'Booking Status', value: 'Cancelled'},
+    ],
   },
   {
     id: 'apt-004',
-    doctorName: 'Rohini Mehra',
-    specialization: 'Dermatologist',
-    status: 'Cancelled',
-    date: 'Monday, 18/09/2023',
-    time: '09:15 AM',
-    doctorImage: 'https://i.pravatar.cc/150?img=3',
+    doctorName: 'Arjun Yadav',
+    specialization: 'Cardiologist',
+    status: 'Upcoming',
+    dateTime: '2025-07-05T22:00:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=10',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'CARD4592834'},
+      {label: 'Appointment type', value: 'Video'},
+      {label: 'Appointment fee', value: '800 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Chest pain'},
+      {label: 'Severity', value: 'High'},
+      {label: 'Duration', value: '1 week'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'HEART2025'},
+      {label: 'Coupon type', value: 'HealthPlus'},
+      {label: 'Coupon status', value: 'Applied'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'CARD4592834'},
+      {label: 'Booking fee', value: '800 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
   },
   {
     id: 'apt-005',
-    doctorName: 'Rohini Mehra',
-    specialization: 'Dermatologist',
+    doctorName: 'Meenal Bhatia',
+    specialization: 'Gynecologist',
+    status: 'Completed',
+    dateTime: '2025-06-28T16:00:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=15',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'GYNO2314587'},
+      {label: 'Appointment type', value: 'In-person'},
+      {label: 'Appointment fee', value: '600 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Irregular periods'},
+      {label: 'Severity', value: 'Moderate'},
+      {label: 'Duration', value: '3 months'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'WELLWOMAN'},
+      {label: 'Coupon type', value: 'Seasonal'},
+      {label: 'Coupon status', value: 'Used'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'GYNO2314587'},
+      {label: 'Booking fee', value: '600 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+  },
+  {
+    id: 'apt-006',
+    doctorName: 'Karan Thakur',
+    specialization: 'Neurologist',
+    status: 'Upcoming',
+    dateTime: '2025-07-09T11:15:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=21',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'NEURO841125'},
+      {label: 'Appointment type', value: 'Video'},
+      {label: 'Appointment fee', value: '700 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Migraine'},
+      {label: 'Severity', value: 'Severe'},
+      {label: 'Duration', value: '5 days'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'NEURORELIEF'},
+      {label: 'Coupon type', value: 'Freeaudio'},
+      {label: 'Coupon status', value: 'Active'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'NEURO841125'},
+      {label: 'Booking fee', value: '700 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
+  },
+  {
+    id: 'apt-007',
+    doctorName: 'Anjali Verma',
+    specialization: 'Psychiatrist',
     status: 'Cancelled',
-    date: 'Monday, 18/09/2023',
-    time: '09:15 AM',
-    doctorImage: 'https://i.pravatar.cc/150?img=3',
+    dateTime: '2025-06-30T17:00:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=25',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'PSYCH928472'},
+      {label: 'Appointment type', value: 'Video'},
+      {label: 'Appointment fee', value: '750 INR'},
+      {label: 'Booking Status', value: 'Cancelled'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Anxiety'},
+      {label: 'Severity', value: 'High'},
+      {label: 'Duration', value: '2 months'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'MINDCARE'},
+      {label: 'Coupon type', value: 'Flat50'},
+      {label: 'Coupon status', value: 'Expired'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'PSYCH928472'},
+      {label: 'Booking fee', value: '750 INR'},
+      {label: 'Booking Status', value: 'Cancelled'},
+    ],
+  },
+  {
+    id: 'apt-008',
+    doctorName: 'Sandeep Roy',
+    specialization: 'ENT Specialist',
+    status: 'Completed',
+    dateTime: '2025-06-25T13:45:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=28',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'ENT7484920'},
+      {label: 'Appointment type', value: 'In-person'},
+      {label: 'Appointment fee', value: '400 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Ear pain'},
+      {label: 'Severity', value: 'Mild'},
+      {label: 'Duration', value: '1 day'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'EAR2025'},
+      {label: 'Coupon type', value: 'Instant'},
+      {label: 'Coupon status', value: 'Used'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'ENT7484920'},
+      {label: 'Booking fee', value: '400 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+  },
+  {
+    id: 'apt-009',
+    doctorName: 'Ritika Sharma',
+    specialization: 'Physiotherapist',
+    status: 'Completed',
+    dateTime: '2025-07-03T08:30:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=33',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'PHYSI836293'},
+      {label: 'Appointment type', value: 'Home Visit'},
+      {label: 'Appointment fee', value: '350 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Back pain'},
+      {label: 'Severity', value: 'Moderate'},
+      {label: 'Duration', value: '2 weeks'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'MOVEFIT'},
+      {label: 'Coupon type', value: 'Fitness'},
+      {label: 'Coupon status', value: 'Applied'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'PHYSI836293'},
+      {label: 'Booking fee', value: '350 INR'},
+      {label: 'Booking Status', value: 'Confirmed'},
+    ],
+  },
+  {
+    id: 'apt-010',
+    doctorName: 'Amitabh Rana',
+    specialization: 'Urologist',
+    status: 'Completed',
+    dateTime: '2025-06-18T18:00:00',
+    doctorImage: 'https://i.pravatar.cc/150?img=38',
+    basicInfo: {
+      gender: 'Female',
+      age: '22',
+      height: '171 cm',
+      weight: '60 kg',
+    },
+    appointmentDetails: [
+      {label: 'Appointment ID', value: 'URO9847124'},
+      {label: 'Appointment type', value: 'Video'},
+      {label: 'Appointment fee', value: '900 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
+    symptomDetails: [
+      {label: 'Concern', value: 'Frequent urination'},
+      {label: 'Severity', value: 'Moderate'},
+      {label: 'Duration', value: '4 days'},
+    ],
+    couponDetails: [
+      {label: 'Coupon code', value: 'UROCARE'},
+      {label: 'Coupon type', value: 'Premium'},
+      {label: 'Coupon status', value: 'Used'},
+    ],
+    bookingDetails: [
+      {label: 'Booking ID', value: 'URO9847124'},
+      {label: 'Booking fee', value: '900 INR'},
+      {label: 'Booking Status', value: 'Completed'},
+    ],
   },
 ];

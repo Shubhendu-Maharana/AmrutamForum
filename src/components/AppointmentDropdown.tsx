@@ -2,19 +2,15 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
-
-type AppointmentData = {
-  label: string;
-  value: string;
-};
+import {KeyValue} from '../types';
 
 interface AppointmentDropdownProps {
-  title?: string;
-  data: AppointmentData[];
+  title: string;
+  data: KeyValue[];
 }
 
 const AppointmentDropdown: React.FC<AppointmentDropdownProps> = ({
-  title = 'Appointment Details',
+  title,
   data,
 }) => {
   const [expanded, setExpanded] = useState(false);

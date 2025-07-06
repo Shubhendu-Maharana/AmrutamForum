@@ -1,7 +1,7 @@
 export interface Doctor {
   id: string;
   name: string;
-  specialties: string[]; // e.g., ['Gynecology', 'Infertility']
+  specialties: string[];
   feePerMinute: number;
   avatarUrl?: string;
 }

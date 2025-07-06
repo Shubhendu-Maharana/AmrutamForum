@@ -13,8 +13,8 @@ import {RootStackParamList} from '../../types/navigationTypes';
 
 const ReschedulingScreen = () => {
   const {currentAppointment, setCurrentAppointment} = useAppointments();
-  const [selectedDate, setSelectedDate] = useState<number>(6);
-  const [selectedTime, setSelectedTime] = useState<string>('10:05 AM');
+  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [selectedTime, setSelectedTime] = useState<string>('');
   const [step, setStep] = useState<'date' | 'time'>('date');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -44,7 +44,11 @@ const ReschedulingScreen = () => {
         Pick Appointment Date
       </Text>
 
-      <CalendarScroll selected={selectedDate} setSelected={setSelectedDate} />
+      <CalendarScroll
+        baseDateISO={currentAppointment?.dateTime ?? ''}
+        selectedDateISO={selectedDate?.toISOString() ?? ''}
+        onDateSelect={newDate => setSelectedDate(newDate)}
+      />
 
       <View
         style={{
@@ -56,19 +60,25 @@ const ReschedulingScreen = () => {
         <View style={{flexDirection: 'row', alignItems: 'center', gap: 12}}>
           <Ionicons name="calendar-outline" size={24} color="#3A643B" />
           <Text style={{fontSize: 14, fontWeight: '400'}}>
-            {selectedDate} February 2025
+            {new Intl.DateTimeFormat('en-GB', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            }).format(selectedDate)}
           </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
-            setCurrentAppointment(
-              prev =>
-                prev && {
-                  ...prev,
-                  date: `${selectedDate} February 2025`,
-                },
-            );
-            setStep('time');
+            if (selectedDate) {
+              setCurrentAppointment(
+                prev =>
+                  prev && {
+                    ...prev,
+                    dateTime: selectedDate.toISOString(),
+                  },
+              );
+              setStep('time');
+            }
           }}
           style={{
             backgroundColor: '#3A643B',
@@ -120,11 +130,25 @@ const ReschedulingScreen = () => {
         }}>
         <TouchableOpacity
           onPress={() => {
+            const [time, meridiem] = selectedTime.split(' ');
+            const [hourStr, minuteStr] = time.split(':');
+            let hour = parseInt(hourStr, 10);
+            const minute = parseInt(minuteStr, 10);
+
+            if (meridiem === 'PM' && hour !== 12) {
+              hour += 12;
+            }
+            if (meridiem === 'AM' && hour === 12) {
+              hour = 0;
+            }
+
+            const newDate = new Date(currentAppointment?.dateTime ?? '');
+            newDate.setHours(hour, minute, 0, 0);
             setCurrentAppointment(
               prev =>
                 prev && {
                   ...prev,
-                  time: selectedTime,
+                  dateTime: newDate.toISOString(),
                 },
             );
             navigation.navigate('Overview');

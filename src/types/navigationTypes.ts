@@ -6,4 +6,5 @@ export type RootStackParamList = {
   Rescheduing: undefined;
   Overview: undefined;
   Confirmation: undefined;
+  EditInfo: {title: string};
 };

@@ -30,11 +30,7 @@ const AppointmentConfirmationScreen = () => {
   );
 
   const handleGotIt = () => {
-    rescheduleAppointment(
-      currentAppointment?.date,
-      currentAppointment?.time,
-      currentAppointment?.rescheduleReason,
-    );
+    rescheduleAppointment();
     navigation.reset({
       index: 0,
       routes: [{name: 'ProfileHome'}],
@@ -68,8 +64,7 @@ const AppointmentConfirmationScreen = () => {
         {/* Details Section */}
         <View style={styles.detailsSection}>
           {renderDetailRow('Expert', currentAppointment?.doctorName)}
-          {renderDetailRow('Appointment Date', currentAppointment?.date)}
-          {renderDetailRow('Appointment Time', currentAppointment?.time)}
+          {renderDetailRow('Appointment Date', currentAppointment?.dateTime)}
           {renderDetailRow('Consultation Type', 'Video Consultaion')}
           {renderDetailRow('Current Wallet Balance', '2,000', true)}
           {renderDetailRow('Consultation Fee', '650', true)}

@@ -8,46 +8,37 @@ import {RootStackParamList} from '../types/navigationTypes';
 import {useAppointments} from '../context/AppointmentContext';
 import {Appointment} from '../types';
 
-interface AppointmentCardProps {
-  appointment: Appointment;
-}
-
-const AppointmentCard: React.FC<AppointmentCardProps> = ({appointment}) => {
+const AppointmentCard: React.FC<{appointment: Appointment}> = ({
+  appointment,
+}) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {setCurrentAppointment} = useAppointments();
-  const getAppointmentDateTime = () => {
-    try {
-      const parts = appointment.date.split(', ')[1].split('/');
-      const timeParts = appointment.time.split(/[: ]/);
-      let hours = parseInt(timeParts[0], 10);
-      const minutes = parseInt(timeParts[1], 10);
-      const meridian = timeParts[2];
 
-      if (meridian === 'PM' && hours < 12) {
-        hours += 12;
-      }
-      if (meridian === 'AM' && hours === 12) {
-        hours = 0;
-      }
+  const formatDateTime = () => {
+    const dateTime = new Date(appointment.dateTime);
+    const now = new Date();
+    const diffInMs = dateTime.getTime() - now.getTime();
 
-      return new Date(
-        parseInt(parts[2], 10),
-        parseInt(parts[1], 10) - 1,
-        parseInt(parts[0], 10),
-        hours,
-        minutes,
-      );
-    } catch {
-      return new Date();
-    }
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+      weekday: 'long',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(dateTime);
+
+    const formattedTime = new Intl.DateTimeFormat('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    }).format(dateTime);
+
+    const isJoinEnabled = diffInMs > 0 && diffInMs <= 30 * 60 * 1000;
+
+    return {formattedDate, formattedTime, isJoinEnabled};
   };
 
-  const appointmentDateTime = getAppointmentDateTime();
-  const now = new Date();
-  const diffInMs = appointmentDateTime.getTime() - now.getTime();
-  const isJoinEnabled =
-    diffInMs <= 30 * 60 * 1000 && diffInMs > -30 * 60 * 1000;
+  const {formattedDate, formattedTime, isJoinEnabled} = formatDateTime();
 
   return (
     <View style={styles.card}>
@@ -69,11 +60,11 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({appointment}) => {
       <View style={styles.datetimeRow}>
         <View style={styles.iconText}>
           <Ionicons name="calendar-outline" size={16} color="#3A643B" />
-          <Text style={styles.datetimeText}>{appointment.date}</Text>
+          <Text style={styles.datetimeText}>{formattedDate}</Text>
         </View>
         <View style={styles.iconText}>
           <Ionicons name="time-outline" size={16} color="#3A643B" />
-          <Text style={styles.datetimeText}>{appointment.time}</Text>
+          <Text style={styles.datetimeText}>{formattedTime}</Text>
         </View>
       </View>
 

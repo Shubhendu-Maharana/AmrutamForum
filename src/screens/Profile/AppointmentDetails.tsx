@@ -12,53 +12,9 @@ import {useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import AppointmentRescheduleModal from '../../components/AppointmentRescheduleModal';
 
-const appointmentData = [
-  {label: 'Appointment ID', value: 'APPLF10247816'},
-  {label: 'Appointment type', value: 'Freeaudio'},
-  {label: 'Appointment fee', value: '0 INR'},
-  {label: 'Duration', value: '1 min'},
-  {label: 'Appointment date', value: '19 Nov, 2024'},
-  {label: 'Appointment time', value: '01:51 PM'},
-  {label: 'Booking Status', value: 'Completed'},
-  {label: 'Routine status', value: 'Not assigned'},
-];
-
-const symptomData = [
-  {label: 'Concern', value: 'Headache'},
-  {label: 'Severity', value: 'Moderate'},
-  {label: 'Duration', value: '1 day'},
-  {label: 'Unit', value: 'Days'},
-];
-
-const couponData = [
-  {label: 'Coupon code', value: 'APPLF10247816'},
-  {label: 'Coupon type', value: 'Freeaudio'},
-  {label: 'Coupon fee', value: '0 INR'},
-  {label: 'Coupon date', value: '19 Nov, 2024'},
-  {label: 'Coupon time', value: '01:51 PM'},
-  {label: 'Coupon status', value: 'Completed'},
-];
-
-const bookingData = [
-  {label: 'Booking ID', value: 'APPLF10247816'},
-  {label: 'Booking type', value: 'Freeaudio'},
-  {label: 'Booking fee', value: '0 INR'},
-  {label: 'Duration', value: '1 min'},
-  {label: 'Booking date', value: '19 Nov, 2024'},
-  {label: 'Booking time', value: '01:51 PM'},
-  {label: 'Booking Status', value: 'Completed'},
-  {label: 'Routine status', value: 'Not assigned'},
-];
-
 const medicalData = [
   {label: 'Medical ID', value: 'APPLF10247816'},
   {label: 'Medical type', value: 'Freeaudio'},
-  {label: 'Medical fee', value: '0 INR'},
-  {label: 'Duration', value: '1 min'},
-  {label: 'Medical date', value: '19 Nov, 2024'},
-  {label: 'Medical time', value: '01:51 PM'},
-  {label: 'Medical Status', value: 'Completed'},
-  {label: 'Routine status', value: 'Not assigned'},
 ];
 
 type AppointmentDetailsRouteProp = RouteProp<
@@ -147,12 +103,21 @@ const AppointmentDetails = () => {
         <View style={{marginTop: 12, gap: 8}}>
           <AppointmentDropdown
             title="Appointment Details"
-            data={appointmentData}
+            data={currentAppointment?.appointmentDetails ?? []}
           />
 
-          <AppointmentDropdown title="Symptom Details" data={symptomData} />
-          <AppointmentDropdown title="Coupons Details" data={couponData} />
-          <AppointmentDropdown title="Booking Details" data={bookingData} />
+          <AppointmentDropdown
+            title="Symptom Details"
+            data={currentAppointment?.symptomDetails ?? []}
+          />
+          <AppointmentDropdown
+            title="Coupons Details"
+            data={currentAppointment?.couponDetails ?? []}
+          />
+          <AppointmentDropdown
+            title="Booking Details"
+            data={currentAppointment?.bookingDetails ?? []}
+          />
           <AppointmentDropdown title="Medical Report" data={medicalData} />
         </View>
       </ScrollView>

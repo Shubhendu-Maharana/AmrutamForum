@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 interface CalendarDate {
+  fullDate: Date;
   date: number;
   day: string;
   month: string;
@@ -16,65 +17,73 @@ interface CalendarDate {
 }
 
 interface CalendarScrollProps {
-  selectedDate?: number;
-  onDateSelect?: (date: CalendarDate) => void;
-  selected: number;
-  setSelected: React.Dispatch<React.SetStateAction<number>>;
+  baseDateISO: string;
+  selectedDateISO: string;
+  onDateSelect: (selectedDate: Date) => void;
 }
 
 const CalendarScroll: React.FC<CalendarScrollProps> = ({
+  baseDateISO,
+  selectedDateISO,
   onDateSelect,
-  selected,
-  setSelected,
 }) => {
-  const calendarDates: CalendarDate[] = [
-    {date: 6, day: 'Friday', month: 'Feb'},
-    {date: 7, day: 'Saturday', month: 'Feb'},
-    {date: 8, day: 'Sunday', month: 'Feb'},
-    {date: 9, day: 'Monday', month: 'Feb'},
-    {date: 10, day: 'Tuesday', month: 'Feb'},
-    {date: 11, day: 'Wednesday', month: 'Feb'},
-    {date: 12, day: 'Thursday', month: 'Feb'},
-    {date: 13, day: 'Friday', month: 'Feb'},
-    {date: 14, day: 'Saturday', month: 'Feb'},
-    {date: 15, day: 'Sunday', month: 'Feb'},
-    {date: 16, day: 'Monday', month: 'Feb'},
-    {date: 17, day: 'Tuesday', month: 'Feb'},
-    {date: 18, day: 'Wednesday', month: 'Feb'},
-    {date: 19, day: 'Thursday', month: 'Feb'},
-    {date: 20, day: 'Friday', month: 'Feb'},
-    {date: 21, day: 'Saturday', month: 'Feb'},
-    {date: 22, day: 'Sunday', month: 'Feb'},
-    {date: 23, day: 'Monday', month: 'Feb'},
-    {date: 24, day: 'Tuesday', month: 'Feb'},
-    {date: 25, day: 'Wednesday', month: 'Feb'},
-  ];
+  const baseDate = new Date(baseDateISO);
+  const selectedDateOnly = new Date(selectedDateISO).toDateString();
 
-  const handleDatePress = (dateItem: CalendarDate) => {
-    setSelected(dateItem.date);
-    if (onDateSelect) {
-      onDateSelect(dateItem);
+  const generateFutureDates = (): CalendarDate[] => {
+    const dates: CalendarDate[] = [];
+
+    for (let i = 0; i < 15; i++) {
+      const newDate = new Date(baseDate);
+      newDate.setDate(baseDate.getDate() + i);
+
+      const dayName = newDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+      });
+      const monthShort = newDate.toLocaleDateString('en-US', {
+        month: 'short',
+      });
+
+      dates.push({
+        fullDate: newDate,
+        date: newDate.getDate(),
+        day: dayName,
+        month: monthShort,
+      });
     }
+
+    return dates;
   };
 
-  const renderDateItem = (dateItem: CalendarDate) => {
-    const isSelected = selected === dateItem.date;
+  const calendarDates = generateFutureDates();
+
+  const renderDateItem = (item: CalendarDate) => {
+    const isSelected = item.fullDate.toDateString() === selectedDateOnly;
 
     return (
       <TouchableOpacity
-        key={dateItem.date}
+        key={item.fullDate.toISOString()}
         style={[
           styles.dateContainer,
           isSelected && styles.selectedDateContainer,
         ]}
-        onPress={() => handleDatePress(dateItem)}
+        onPress={() => {
+          const year = item.fullDate.getFullYear();
+          const month = (item.fullDate.getMonth() + 1)
+            .toString()
+            .padStart(2, '0');
+          const day = item.fullDate.getDate().toString().padStart(2, '0');
+
+          const isoDateWithoutTime = `${year}-${month}-${day}T00:00:00`;
+          onDateSelect(new Date(isoDateWithoutTime));
+        }}
         activeOpacity={0.7}>
         <Text
           style={[styles.dateNumber, isSelected && styles.selectedDateNumber]}>
-          {dateItem.date.toString().padStart(2, '0')} {dateItem.month}
+          {item.date.toString().padStart(2, '0')} {item.month}
         </Text>
         <Text style={[styles.dayName, isSelected && styles.selectedDayName]}>
-          {dateItem.day}
+          {item.day}
         </Text>
       </TouchableOpacity>
     );
@@ -88,7 +97,7 @@ const CalendarScroll: React.FC<CalendarScrollProps> = ({
         contentContainerStyle={styles.scrollContent}
         style={styles.scrollView}>
         <View style={styles.gridContainer}>
-          {calendarDates.map(dateItem => renderDateItem(dateItem))}
+          {calendarDates.map(renderDateItem)}
         </View>
       </ScrollView>
     </View>
